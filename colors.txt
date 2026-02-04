@@ -1,0 +1,23 @@
+#263C70
+#9DC668
+#4EB8BC
+#7B5F96
+
+
+ background: `
+  linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f5f7fb 25%,
+    #e3edf7 50%,
+    #cddff0 75%,
+    #bfcfe5 100%
+  )
+`,
+
+
+
+#4B5563
+
+
+#d7d8db border color
