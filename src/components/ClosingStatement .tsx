@@ -140,6 +140,14 @@ const ClosingStatement: React.FC = () => {
             <Button
               variant="contained"
               size="large"
+              onClick={() => {
+              const el = document.getElementById("contact");
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+              } else {
+                window.location.href = "/#contact";
+              }
+            }}
               sx={{
                 mt: 2,
                 backgroundColor: colors.primary,
