@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Typography,
@@ -12,6 +12,135 @@ import {
   TrendingUp as TrendingUpIcon,
 } from '@mui/icons-material';
 import { motion, AnimatePresence } from 'framer-motion';
+
+// --- ANIMATION CLASSES & COMPONENT START ---
+
+// 1. Class definition moved OUTSIDE the component to fix the warning
+class Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  width: number;
+  height: number;
+
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random() - 0.5) * 0.5; // Slow speed
+    this.vy = (Math.random() - 0.5) * 0.5;
+    this.size = Math.random() * 2 + 1;
+  }
+
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Bounce off edges
+    if (this.x < 0 || this.x > this.width) this.vx *= -1;
+    if (this.y < 0 || this.y > this.height) this.vy *= -1;
+  }
+
+  draw(ctx: CanvasRenderingContext2D) {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    // Using your primary color but semi-transparent
+    ctx.fillStyle = 'rgba(38, 60, 112, 0.6)';
+    ctx.fill();
+  }
+}
+
+const ParticlesBackground = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    let particles: Particle[] = [];
+    const particleCount = 100; // Number of dots
+    const connectionDistance = 150; // Distance to draw lines
+
+    // Initialize particles with current screen dimensions
+    const initParticles = () => {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle(width, height));
+      }
+    };
+
+    initParticles();
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach((p, index) => {
+        p.update();
+        p.draw(ctx);
+
+        // Draw connections
+        for (let j = index + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < connectionDistance) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(38, 60, 112, ${
+              0.15 * (1 - distance / connectionDistance)
+            })`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    const animationFrameId = requestAnimationFrame(animate);
+
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initParticles(); // Re-initialize on resize
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 1, // Sit on top of video, below content
+        pointerEvents: 'none', // Allow clicking through
+      }}
+    />
+  );
+};
+// --- ANIMATION COMPONENT END ---
 
 const Hero: React.FC = () => {
   const [view, setView] = useState<'hero' | 'clients'>('hero');
@@ -30,20 +159,21 @@ const Hero: React.FC = () => {
   ];
 
 
-// Initial single switch after 3 seconds
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setView('clients');
-  //   }, 3000);
-  //   return () => clearTimeout(timer);
-  // }, []);
+
+// useEffect(() => {
+//   const timer = setTimeout(() => {
+//     setView('clients'); // move to second page
+//   }, 3000); // 3 seconds
+
+//   return () => clearTimeout(timer);
+// }, []);
 
 
-// Alternate useEffect to toggle views continuously
-useEffect(() => {
+  // Alternate useEffect to toggle views continuously
+  useEffect(() => {
     const timer = setTimeout(() => {
       setView((prev) => (prev === 'hero' ? 'clients' : 'hero'));
-    }, view === 'hero' ? 3000 : 5000);
+    }, view === 'hero' ? 4000 : 4000);
 
     return () => clearTimeout(timer);
   }, [view]);
@@ -66,7 +196,7 @@ useEffect(() => {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        position: 'relative', // Keep as relative to contain the absolute video
+        position: 'relative',
       }}
     >
       {/* --- BACKGROUND VIDEO LAYER --- */}
@@ -88,7 +218,7 @@ useEffect(() => {
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundColor: 'rgba(248, 249, fa, 0.85)', // Light overlay matching bg color
+            backgroundColor: 'rgba(248, 249, 250, 0.85)',
           }
         }}
       >
@@ -98,7 +228,7 @@ useEffect(() => {
           muted
           loop
           playsInline
-          poster="/images/option1.mp4" // High-res image while video loads
+          poster="/images/option1.mp4"
           sx={{
             width: '100%',
             height: '100%',
@@ -111,8 +241,11 @@ useEffect(() => {
         </Box>
       </Box>
 
+      {/* --- ADDED ANIMATION LAYER --- */}
+      <ParticlesBackground />
+
       {/* --- CONTENT LAYER --- */}
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
         <AnimatePresence mode="wait">
           {view === 'hero' ? (
             <motion.div
@@ -129,7 +262,7 @@ useEffect(() => {
                     sx={{
                       fontSize: { xs: '2.5rem', md: '4.5rem' },
                       fontWeight: 'bold',
-                      color: '#000',
+                      color: colors.primary,
                       mb: 2,
                     }}
                   >
@@ -220,8 +353,8 @@ useEffect(() => {
                           justifyContent: 'center',
                           minHeight: { xs: 120, md: 180 },
                           p: { xs: 3, md: 4 },
-                          backgroundColor: 'rgba(255, 255, 255, 0.9)', // Slightly transparent to show video
-                          backdropFilter: 'blur(4px)', // Nice glass effect
+                          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                          backdropFilter: 'blur(4px)',
                           borderRadius: 3,
                           border: '1px solid rgba(0,0,0,0.08)',
                           boxShadow: '0 2px 12px rgba(0,0,0,0.06)',

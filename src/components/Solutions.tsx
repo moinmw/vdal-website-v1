@@ -192,17 +192,21 @@ const Solutions: React.FC = () => {
               </Box>
 
               <Typography
-                variant="h2"
-                sx={{
-                  fontSize: { xs: "2.5rem", md: "3.5rem" },
-                  fontWeight: 800,
-                  lineHeight: 1.1,
-                  color: "#000",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                VDAL Solution Overview
-              </Typography>
+  variant="h2"
+  sx={{
+    fontSize: { xs: "2.5rem", md: "3.5rem" },
+    fontWeight: 800,
+    lineHeight: 1.1,
+    color: "#000",
+    letterSpacing: "-0.02em",
+  }}
+>
+  <Box component="span" sx={{ color: "#263C70" }}>
+    VDAL
+  </Box>
+  {' '}Solution Overview
+</Typography>
+
 
               <Typography
                 sx={{

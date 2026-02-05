@@ -25,18 +25,23 @@ const ArchitectureView: React.FC<ArchitectureViewProps> = ({
       >
         {/* Header Section */}
         <Box sx={{ mb: 4, textAlign: 'center' }}>
-          <Typography 
-            variant="h4" 
-            component="h2" 
-            sx={{ 
-              color: '#000000', 
-              fontWeight: 800,
-              letterSpacing: '0.5px',
-              mb: 1
-            }}
-          >
-            Architecture — Where VDAL Fits
-          </Typography>
+         <Typography 
+  variant="h4" 
+  component="h2" 
+  sx={{ 
+    color: '#000000', 
+    fontWeight: 800,
+    letterSpacing: '0.5px',
+    mb: 1
+  }}
+>
+  <Box component="span" sx={{ color: '#263C70' }}>
+    Architecture
+  </Box>
+  {' '}— Where VDAL Fits
+</Typography>
+
+          
           <Box 
             sx={{ 
               width: '60px', 
