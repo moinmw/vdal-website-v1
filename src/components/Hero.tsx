@@ -98,6 +98,7 @@ const Hero: React.FC = () => {
         Your browser does not support the video tag.
       </video>
 
+
       {/* Overlay to improve text readability */}
       <Box
         sx={{
