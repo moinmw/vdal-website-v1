@@ -37,6 +37,18 @@ const Hero: React.FC = () => {
     { name: 'SmartData Pro', industry: 'Telecom' },
   ];
 
+  // Shared fadeInUp animation keyframes
+  const fadeInUpKeyframes = {
+    '0%': {
+      opacity: 0,
+      transform: 'translateY(30px)',
+    },
+    '100%': {
+      opacity: 1,
+      transform: 'translateY(0)',
+    },
+  };
+
   return (
     <Box
       id="home"
@@ -107,16 +119,7 @@ const Hero: React.FC = () => {
                       color: '#000',
                       mb: 2,
                       animation: 'fadeInUp 0.8s ease-out',
-                      '@keyframes fadeInUp': {
-                        '0%': {
-                          opacity: 0,
-                          transform: 'translateY(30px)',
-                        },
-                        '100%': {
-                          opacity: 1,
-                          transform: 'translateY(0)',
-                        },
-                      },
+                      '@keyframes fadeInUp': fadeInUpKeyframes,
                     }}
                   >
                     Unified, Governed,{' '}
@@ -150,6 +153,7 @@ const Hero: React.FC = () => {
                       flexWrap: 'wrap',
                       gap: { xs: 1, md: 2 },
                       animation: 'fadeInUp 0.8s ease-out 0.2s backwards',
+                      '@keyframes fadeInUp': fadeInUpKeyframes,
                     }}
                   >
                     AI-Ready{' '}
@@ -182,6 +186,7 @@ const Hero: React.FC = () => {
                     lineHeight: 1.6,
                     mb: 1,
                     animation: 'fadeInUp 0.8s ease-out 0.4s backwards',
+                    '@keyframes fadeInUp': fadeInUpKeyframes,
                   }}
                 >
                   VDAL is the strategic backbone for secure, real-time, and compliant enterprise data access without disrupting your existing data estates.
@@ -197,6 +202,7 @@ const Hero: React.FC = () => {
                     maxWidth: '700px',
                     lineHeight: 1.6,
                     animation: 'fadeInUp 0.8s ease-out 0.6s backwards',
+                    '@keyframes fadeInUp': fadeInUpKeyframes,
                   }}
                 >
                   One intelligent access layer that unifies analytics, automation, semantics, and governance on the latest trusted data.
@@ -225,6 +231,7 @@ const Hero: React.FC = () => {
                     fontWeight: 600,
                     boxShadow: '0 4px 12px rgba(38, 60, 112, 0.3)',
                     animation: 'fadeInUp 0.8s ease-out 0.8s backwards',
+                    '@keyframes fadeInUp': fadeInUpKeyframes,
                     '&:hover': {
                       backgroundColor: colors.primary,
                       boxShadow: '0 6px 20px rgba(38, 60, 112, 0.4)',
@@ -263,6 +270,7 @@ const Hero: React.FC = () => {
                       color: '#000',
                       mb: 2,
                       animation: 'fadeInUp 0.8s ease-out',
+                      '@keyframes fadeInUp': fadeInUpKeyframes,
                     }}
                   >
                     Trusted by Industry Leaders
@@ -276,6 +284,7 @@ const Hero: React.FC = () => {
                       maxWidth: '800px',
                       lineHeight: 1.6,
                       animation: 'fadeInUp 0.8s ease-out 0.2s backwards',
+                      '@keyframes fadeInUp': fadeInUpKeyframes,
                     }}
                   >
                     Join 50+ enterprise teams transforming their data infrastructure with VDAL
@@ -294,11 +303,12 @@ const Hero: React.FC = () => {
                     },
                     gap: 3,
                     animation: 'fadeInUp 0.8s ease-out 0.4s backwards',
+                    '@keyframes fadeInUp': fadeInUpKeyframes,
                   }}
                 >
                   {clients.map((client, index) => (
                     <Box
-                      key={index}
+                      key={client.name}
                       sx={{
                         p: 3,
                         backgroundColor: 'white',
@@ -306,6 +316,7 @@ const Hero: React.FC = () => {
                         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
                         transition: 'all 0.3s ease',
                         animation: `fadeInUp 0.8s ease-out ${0.4 + index * 0.1}s backwards`,
+                        '@keyframes fadeInUp': fadeInUpKeyframes,
                         '&:hover': {
                           transform: 'translateY(-8px)',
                           boxShadow: '0 8px 24px rgba(0, 0, 0, 0.12)',
@@ -357,6 +368,7 @@ const Hero: React.FC = () => {
                     fontWeight: 600,
                     boxShadow: '0 4px 12px rgba(157, 198, 104, 0.3)',
                     animation: 'fadeInUp 0.8s ease-out 1.2s backwards',
+                    '@keyframes fadeInUp': fadeInUpKeyframes,
                     '&:hover': {
                       backgroundColor: colors.secondary,
                       boxShadow: '0 6px 20px rgba(157, 198, 104, 0.4)',
