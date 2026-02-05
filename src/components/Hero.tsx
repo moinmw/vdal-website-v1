@@ -173,7 +173,7 @@ const Hero: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setView((prev) => (prev === 'hero' ? 'clients' : 'hero'));
-    }, view === 'hero' ? 4000 : 4000);
+    }, view === 'hero' ? 4000 : 7000);
 
     return () => clearTimeout(timer);
   }, [view]);
