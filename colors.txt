@@ -21,3 +21,36 @@
 
 
 #d7d8db border color
+
+
+
+
+
+ //   useEffect(() => {
+  //   let timer: NodeJS.Timeout;
+  //   if (view === 'hero') {
+  //     // Stay on Hero for 3 seconds, then move to Clients
+  //     timer = setTimeout(() => {
+  //       setView('clients');
+  //     }, 3000);
+  //   } else {
+  //     // Stay on Clients for 5 seconds, then move back to Hero
+  //     timer = setTimeout(() => {
+  //       setView('hero');
+  //     }, 5000);
+  //   }
+  //   return () => clearTimeout(timer);
+  // }, [view]); // The effect re-runs whenever 'view' changes
+
+
+
+
+
+
+useEffect(() => {
+    const timer = setTimeout(() => {
+      setView((prev) => (prev === 'hero' ? 'clients' : 'hero'));
+    }, view === 'hero' ? 3000 : 5000);
+
+    return () => clearTimeout(timer);
+  }, [view]);

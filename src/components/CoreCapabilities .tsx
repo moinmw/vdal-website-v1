@@ -3,6 +3,7 @@
 import { Box, Container, Typography, Stack } from "@mui/material";
 import { useState } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function CoreCapabilities() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -50,17 +51,30 @@ export default function CoreCapabilities() {
       <Container maxWidth="lg">
 
         {/* TOP HEADING */}
-        <Typography
-          variant="h3"
-          textAlign="center"
-          fontWeight={800}
-          sx={{ mb: 6, color: "#111827" }}
+        <Box
+          component={motion.div}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          Core Strategic Capabilities
-        </Typography>
+          <Typography
+            variant="h3"
+            textAlign="center"
+            fontWeight={800}
+            sx={{ mb: 6, color: "#111827" }}
+          >
+            Core Strategic Capabilities
+          </Typography>
+        </Box>
 
         {/* CONTENT */}
         <Box
+          component={motion.div}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
@@ -74,6 +88,11 @@ export default function CoreCapabilities() {
               {capabilities.map((cap, index) => (
                 <Box
                   key={index}
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
                   onMouseEnter={() => setActiveIndex(index)}
                   sx={{
                     px: 2,
@@ -124,7 +143,13 @@ export default function CoreCapabilities() {
 
           {/* RIGHT CONTENT */}
           <Box sx={{ flex: { xs: "1 1 auto", md: "0 0 60%" }, width: "100%" }}>
+            {/* Card wrapper animates on first view; inner content transitions on index change */}
             <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               sx={{
                 p: { xs: 4, md: 6 },
                 borderRadius: "24px",
@@ -137,26 +162,37 @@ export default function CoreCapabilities() {
                 justifyContent: "center",
               }}
             >
-              <Typography
-                variant="h4"
-                fontWeight={700}
-                sx={{
-                  mb: 3,
-                  color: colors.secondary, // KEEP GREEN
-                }}
-              >
-                {capabilities[activeIndex].title}
-              </Typography>
+              <AnimatePresence mode="wait">
+                <Box
+                  key={activeIndex}
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                >
+                  <Typography
+                    variant="h4"
+                    fontWeight={700}
+                    sx={{
+                      mb: 3,
+                      color: colors.secondary, // KEEP GREEN
+                    }}
+                  >
+                    {capabilities[activeIndex].title}
+                  </Typography>
 
-              <Typography
-                sx={{
-                  color: "#374151",
-                  lineHeight: 1.8,
-                  fontSize: "1.15rem",
-                }}
-              >
-                {capabilities[activeIndex].desc}
-              </Typography>
+                  <Typography
+                    sx={{
+                      color: "#374151",
+                      lineHeight: 1.8,
+                      fontSize: "1.15rem",
+                    }}
+                  >
+                    {capabilities[activeIndex].desc}
+                  </Typography>
+                </Box>
+              </AnimatePresence>
             </Box>
           </Box>
         </Box>

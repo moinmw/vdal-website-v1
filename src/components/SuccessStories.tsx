@@ -7,14 +7,22 @@ import {
   Card,
   CardContent,
   Stack,
-  // Chip,
 } from "@mui/material";
 import { CheckCircle as CheckCircleIcon } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 const BusinessImpactList: React.FC<{ items: string[] }> = ({ items }) => (
   <Stack spacing={2}>
     {items.map((impact, index) => (
-      <Box key={index} sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
+      <Box
+        key={index}
+        component={motion.div}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
+        sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}
+      >
         <CheckCircleIcon sx={{ fontSize: 22, mt: "2px" }} />
         <Typography sx={{ fontSize: "16px", lineHeight: 1.6 }}>
           {impact}
@@ -31,47 +39,55 @@ const SuccessStories: React.FC = () => {
   };
 
   return (
-    <Box 
-    id="clients"
-    sx={{ py: { xs: 6, md: 10 }, backgroundColor: "white" }}>
+    <Box id="clients" sx={{ py: { xs: 6, md: 10 }, backgroundColor: "white" }}>
       <Container maxWidth="lg">
         <Stack spacing={6} alignItems="center">
           {/* Our Clients Chip */}
           <Box
-                          sx={{
-                            width: "fit-content",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            backgroundColor: "#E4F4D7",
-                            borderRadius: "999px",
-                            px: 2.5,
-                            py: 1,
-                            gap: 1.5,
-                          }}
-                        >
-                          <Box
-                            sx={{
-                              width: 10,
-                              height: 10,
-                              borderRadius: "50%",
-                              backgroundColor: colors.secondary,
-                            }}
-                          />
-                          <Typography
-                            sx={{
-                              fontSize: "14px",
-                              fontWeight: 600,
-                              color: "#111827",
-                            }}
-                          >
-                            Our Clients
-                          </Typography>
-                        </Box>
+            component={motion.div}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            sx={{
+              width: "fit-content",
+              display: "inline-flex",
+              alignItems: "center",
+              backgroundColor: "#E4F4D7",
+              borderRadius: "999px",
+              px: 2.5,
+              py: 1,
+              gap: 1.5,
+            }}
+          >
+            <Box
+              sx={{
+                width: 10,
+                height: 10,
+                borderRadius: "50%",
+                backgroundColor: colors.secondary,
+              }}
+            />
+            <Typography
+              sx={{
+                fontSize: "14px",
+                fontWeight: 600,
+                color: "#111827",
+              }}
+            >
+              Our Clients
+            </Typography>
+          </Box>
 
           {/* Heading */}
-
-
-          <Box sx={{ textAlign: "center", maxWidth: "800px" }}>
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
+            sx={{ textAlign: "center", maxWidth: "800px" }}
+          >
             <Typography
               variant="h2"
               sx={{
@@ -103,74 +119,96 @@ const SuccessStories: React.FC = () => {
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               gap: 4,
+              alignItems: 'stretch',
             }}
           >
             {/* ZATCA Business Impact */}
-            <Box sx={{ flex: 1 }}>
-              <Card
-                sx={{
-                  background:
-                    "linear-gradient(135deg, #4c78c5 0%, #1D2B6B 100%)",
-                  color: "white",
-                  borderRadius: 4,
-                  height: "100%",
-                }}
+            <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}
               >
-                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                  <Typography sx={{ fontWeight: "bold", fontSize: "24px", mb: 3 }}>
-                    Business Impact
-                  </Typography>
+                <Card
+                  sx={{
+                    background: "linear-gradient(135deg, #4c78c5 0%, #1D2B6B 100%)",
+                    color: "white",
+                    borderRadius: 4,
+                    height: "100%",
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <CardContent sx={{ p: { xs: 3, md: 4 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize: "24px", mb: 3 }}>
+                      Business Impact
+                    </Typography>
 
-                  <BusinessImpactList
-                    items={[
-                      "100% elimination of analytical data copies built for BI consumption",
-                      "Faster KPI generation and reporting cycles",
-                      "Centralized audit traceability for all analytical workloads",
-                      "Significant infrastructure cost reduction",
-                      "Safe AI adoption for regulated reporting teams",
-                    ]}
-                  />
-                </CardContent>
-              </Card>
+                    <BusinessImpactList
+                      items={[
+                        "100% elimination of analytical data copies built for BI consumption",
+                        "Faster KPI generation and reporting cycles",
+                        "Centralized audit traceability for all analytical workloads",
+                        "Significant infrastructure cost reduction",
+                        "Safe AI adoption for regulated reporting teams",
+                      ]}
+                    />
+                  </CardContent>
+                </Card>
+              </Box>
             </Box>
 
             {/* ZATCA Story */}
-            <Box sx={{ flex: 1 }}>
-              <Card
-                sx={{
-                  backgroundColor: "#F5F5F7",
-                  borderRadius: 4,
-                  height: "100%",
-                }}
+            <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}
               >
-                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                  <Typography sx={{ fontWeight: "bold", fontSize: "28px", mb: 3 }}>
-                    ZATCA
-                  </Typography>
-
-                  <Stack spacing={2} sx={{backgroundColor:"#ffffff", p:2, borderRadius:2}}>
-                    <Typography sx={{ fontWeight: 600 }}>
-                      Client Challenge
-                    </Typography>
-                    <Typography>
-                      Enterprise data stored in distributed object repositories
-                      created performance bottlenecks due to legacy query
-                      dependencies. BI and advanced analytics could not run
-                      directly on data sources, shifting focus away from insights.
+                <Card
+                  sx={{
+                    backgroundColor: "#F5F5F7",
+                    borderRadius: 4,
+                    height: "100%",
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <CardContent sx={{ p: { xs: 3, md: 4 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize: "28px", mb: 3 }}>
+                      ZATCA
                     </Typography>
 
-                    <Typography sx={{ fontWeight: 600, mt: 2 }}>
-                      VDAL Impact Delivered
-                    </Typography>
-                    <Typography>
-                      VDAL removed repeated analytics pipelines and enabled
-                      real-time governed BI access on trusted data without data
-                      movement, while delivering unified visibility into query
-                      behavior.
-                    </Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
+                    <Stack spacing={2} sx={{ backgroundColor: "#ffffff", p: 2, borderRadius: 2 }}>
+                      <Typography sx={{ fontWeight: 600 }}>
+                        Client Challenge
+                      </Typography>
+                      <Typography>
+                        Enterprise data stored in distributed object repositories
+                        created performance bottlenecks due to legacy query
+                        dependencies. BI and advanced analytics could not run
+                        directly on data sources, shifting focus away from insights.
+                      </Typography>
+
+                      <Typography sx={{ fontWeight: 600, mt: 2 }}>
+                        VDAL Impact Delivered
+                      </Typography>
+                      <Typography>
+                        VDAL removed repeated analytics pipelines and enabled
+                        real-time governed BI access on trusted data without data
+                        movement, while delivering unified visibility into query
+                        behavior.
+                      </Typography>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Box>
             </Box>
           </Box>
 
@@ -185,71 +223,93 @@ const SuccessStories: React.FC = () => {
           >
             {/* STC Story */}
             <Box sx={{ flex: 1 }}>
-              <Card
-                sx={{
-                  backgroundColor: "#F5F5F7",
-                  borderRadius: 4,
-                  height: "100%",
-                }}
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
               >
-                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                  <Typography sx={{ fontWeight: "bold", fontSize: "28px", mb: 3 }}>
-                    STC (Telecom)
-                  </Typography>
-
-                  <Stack spacing={2} sx={{backgroundColor:"#ffffff", p:2, borderRadius:2}}>
-                    <Typography sx={{ fontWeight: 600 }}>
-                      Client Challenge
-                    </Typography>
-                    <Typography>
-                      Telecom data spread across legacy systems, cloud platforms,
-                      NoSQL stores, and distributed data lakes led to duplicated
-                      analytics pipelines, inconsistent KPIs, and fragmented
-                      access control.
+                <Card
+                  sx={{
+                    backgroundColor: "#F5F5F7",
+                    borderRadius: 4,
+                    height: "100%",
+                  }}
+                >
+                  <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize: "28px", mb: 3 }}>
+                      STC (Telecom)
                     </Typography>
 
-                    <Typography sx={{ fontWeight: 600, mt: 2 }}>
-                      VDAL Impact Delivered
-                    </Typography>
-                    <Typography>
-                      VDAL established a unified governed access backbone,
-                      enabling live access to trusted telecom KPIs across
-                      enterprise, digital, and analytical consumers.
-                    </Typography>
-                  </Stack>
-                </CardContent>
-              </Card>
+                    <Stack spacing={2} sx={{ backgroundColor: "#ffffff", p: 2, borderRadius: 2 }}>
+                      <Typography sx={{ fontWeight: 600 }}>
+                        Client Challenge
+                      </Typography>
+                      <Typography>
+                        Telecom data spread across legacy systems, cloud platforms,
+                        NoSQL stores, and distributed data lakes led to duplicated
+                        analytics pipelines, inconsistent KPIs, and fragmented
+                        access control.
+                      </Typography>
+
+                      <Typography sx={{ fontWeight: 600, mt: 2 }}>
+                        VDAL Impact Delivered
+                      </Typography>
+                      <Typography>
+                        VDAL established a unified governed access backbone,
+                        enabling live access to trusted telecom KPIs across
+                        enterprise, digital, and analytical consumers.
+                      </Typography>
+                    </Stack>
+                  </CardContent>
+                </Card>
+              </Box>
             </Box>
 
             {/* STC Business Impact */}
-            <Box sx={{ flex: 1 }}>
-              <Card
-                sx={{
-                  background:
-                    "linear-gradient(135deg, #4c78c5 0%, #1D2B6B 100%)",
-                  color: "white",
-                  borderRadius: 4,
-                  height: "100%",
-                }}
-              >
-                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                  <Typography sx={{ fontWeight: "bold", fontSize: "24px", mb: 3 }}>
-                    Business Impact
-                  </Typography>
 
-                  <BusinessImpactList
-                    items={[
-                      "Consistent regulatory KPIs across all dashboards",
-                      "70% improvement in analysis speed and team productivity",
-                      "50% reduction in duplicated data integrations",
-                      "No new storage created for analytics consumption",
-                      "Customer 360 and network analytics without data copies",
-                      "AI-ready foundation for telecom workloads",
-                    ]}
-                  />
-                </CardContent>
-              </Card>
+
+                  <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+              >
+                <Card
+                  sx={{
+                    background: "linear-gradient(135deg, #4c78c5 0%, #1D2B6B 100%)",
+                    color: "white",
+                    borderRadius: 4,
+                    height: "100%",
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <CardContent sx={{ p: { xs: 3, md: 4 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                    <Typography sx={{ fontWeight: "bold", fontSize: "24px", mb: 3 }}>
+                      Business Impact
+                    </Typography>
+
+                    <BusinessImpactList
+                      items={[
+                        "Consistent regulatory KPIs across all dashboards",
+                        "70% improvement in analysis speed and team productivity",
+                        "50% reduction in duplicated data integrations",
+                        "No new storage created for analytics consumption",
+                        "Customer 360 and network analytics without data copies",
+                        "AI-ready foundation for telecom workloads",
+                      ]}
+                    />
+                  </CardContent>
+                </Card>
+              </Box>
             </Box>
+
+      
           </Box>
         </Stack>
       </Container>

@@ -12,6 +12,7 @@ import {
   TrendingUp as TrendingUpIcon,
   Timeline as TimelineIcon,
 } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 const ClosingStatement: React.FC = () => {
   const colors = {
@@ -31,7 +32,13 @@ const ClosingStatement: React.FC = () => {
       }}
     >
       <Container maxWidth="lg">
+        {/* Motion wrapper inside to preserve layout */}
         <Box
+          component={motion.div}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           sx={{
             borderRadius: { xs: 4, md: "30px" },
             p: { xs: 5, md: 8 },
@@ -48,6 +55,12 @@ const ClosingStatement: React.FC = () => {
         >
           {/* Floating icons */}
           <Box
+            component={motion.div}
+            initial={{ opacity: 0, scale: 0.95, y: -8 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            animate={{ y: [-4, 4, -4] }}
+            transition={{ duration: 6, ease: "easeInOut" }}
             sx={{
               position: "absolute",
               top: "16%",
@@ -68,6 +81,12 @@ const ClosingStatement: React.FC = () => {
           </Box>
 
           <Box
+            component={motion.div}
+            initial={{ opacity: 0, scale: 0.95, y: 8 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            animate={{ y: [4, -4, 4] }}
+            transition={{ duration: 6, ease: "easeInOut"}}
             sx={{
               position: "absolute",
               bottom: "12%",
@@ -88,6 +107,12 @@ const ClosingStatement: React.FC = () => {
           </Box>
 
           <Box
+            component={motion.div}
+            initial={{ opacity: 0, scale: 0.95, y: -6 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            animate={{ y: [-3, 3, -3] }}
+            transition={{ duration: 6, ease: "easeInOut" }}
             sx={{
               position: "absolute",
               top: "26%",
@@ -109,64 +134,88 @@ const ClosingStatement: React.FC = () => {
 
           {/* Content */}
           <Stack spacing={4} alignItems="center">
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: "2.4rem", md: "3.2rem" },
-                fontWeight: 800,
-                lineHeight: 1.15,
-                color: "#0F172A",
-                maxWidth: "760px",
-              }}
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
             >
-              The strategic backbone for enterprise data access
-            </Typography>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: "2.4rem", md: "3.2rem" },
+                  fontWeight: 800,
+                  lineHeight: 1.15,
+                  color: "#0F172A",
+                  maxWidth: "760px",
+                }}
+              >
+                The strategic backbone for enterprise data access
+              </Typography>
+            </Box>
 
-            <Typography
-              variant="h6"
-              sx={{
-                color: "#4B5563",
-                fontSize: { xs: "15px", md: "18px" },
-                fontWeight: 400,
-                lineHeight: 1.7,
-                maxWidth: "760px",
-              }}
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
             >
-              VDAL is the strategic backbone for governed, real-time, AI-ready
-              enterprise data access — unifying analytics, automation, semantics,
-              and compliance without disrupting existing data estates.
-            </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#4B5563",
+                  fontSize: { xs: "15px", md: "18px" },
+                  fontWeight: 400,
+                  lineHeight: 1.7,
+                  maxWidth: "760px",
+                }}
+              >
+                VDAL is the strategic backbone for governed, real-time, AI-ready
+                enterprise data access — unifying analytics, automation, semantics,
+                and compliance without disrupting existing data estates.
+              </Typography>
+            </Box>
 
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => {
-              const el = document.getElementById("contact");
-              if (el) {
-                el.scrollIntoView({ behavior: "smooth", block: "start" });
-              } else {
-                window.location.href = "/#contact";
-              }
-            }}
-              sx={{
-                mt: 2,
-                backgroundColor: colors.primary,
-                color: "white",
-                textTransform: "none",
-                borderRadius: "999px",
-                px: 5,
-                py: 1.8,
-                fontSize: "17px",
-                fontWeight: 600,
-                boxShadow: "0 8px 24px rgba(15, 23, 42, 0.35)",
-                "&:hover": {
-                  backgroundColor: "#1E3058",
-                  boxShadow: "0 10px 30px rgba(15, 23, 42, 0.45)",
-                },
-              }}
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.25 }}
             >
-              Book a Demo
-            </Button>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={() => {
+                  const el = document.getElementById("contact");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" });
+                  } else {
+                    window.location.href = "/#contact";
+                  }
+                }}
+                sx={{
+                  mt: 2,
+                  backgroundColor: colors.primary,
+                  color: "white",
+                  textTransform: "none",
+                  borderRadius: "999px",
+                  px: 5,
+                  py: 1.8,
+                  fontSize: "17px",
+                  fontWeight: 600,
+                  boxShadow: "0 8px 24px rgba(15, 23, 42, 0.35)",
+                  "&:hover": {
+                    backgroundColor: "#1E3058",
+                    boxShadow: "0 10px 30px rgba(15, 23, 42, 0.45)",
+                  },
+                }}
+              >
+                Book a Demo
+              </Button>
+            </Box>
           </Stack>
         </Box>
       </Container>

@@ -6,6 +6,7 @@ import {
   Dashboard as DashboardIcon,
   Storage as StorageIcon,
 } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 const Solutions: React.FC = () => {
   const colors = {
@@ -15,26 +16,25 @@ const Solutions: React.FC = () => {
   };
 
   const solutions = [
-  {
-    icon: <LayersIcon sx={{ fontSize: 28, color: "white" }} />,
-    title: "Unified Governed Access Backbone",
-    description:
-      "A single governed access layer delivering real-time access to trusted enterprise data with zero duplication for analytical consumption.",
-  },
-  {
-    icon: <DashboardIcon sx={{ fontSize: 28, color: "white" }} />,
-    title: "Consistent Governance & KPI Standardization",
-    description:
-      "Unified governance inherited across every query, KPI, dataset, and report, with standardized KPI-led data products for enterprise reporting.",
-  },
-  {
-    icon: <StorageIcon sx={{ fontSize: 28, color: "white" }} />,
-    title: "Safe, Scalable AI-Ready Analytics",
-    description:
-      "AI-driven analytics delivered within governance boundaries, horizontally scalable to support enterprise and AI workloads.",
-  },
-];
-
+    {
+      icon: <LayersIcon sx={{ fontSize: 28, color: "white" }} />,
+      title: "Unified Governed Access Backbone",
+      description:
+        "A single governed access layer delivering real-time access to trusted enterprise data with zero duplication for analytical consumption.",
+    },
+    {
+      icon: <DashboardIcon sx={{ fontSize: 28, color: "white" }} />,
+      title: "Consistent Governance & KPI Standardization",
+      description:
+        "Unified governance inherited across every query, KPI, dataset, and report, with standardized KPI-led data products for enterprise reporting.",
+    },
+    {
+      icon: <StorageIcon sx={{ fontSize: 28, color: "white" }} />,
+      title: "Safe, Scalable AI-Ready Analytics",
+      description:
+        "AI-driven analytics delivered within governance boundaries, horizontally scalable to support enterprise and AI workloads.",
+    },
+  ];
 
   return (
     <Box
@@ -45,14 +45,7 @@ const Solutions: React.FC = () => {
         scrollMarginTop: "80px",
       }}
     >
-      {/* Make sure Container is not overridden by global CSS */}
-      <Container
-        maxWidth="lg"
-        sx={{
-          // helpful visual debug; remove later
-          // border: "1px solid lime",
-        }}
-      >
+      <Container maxWidth="lg">
         <Box
           sx={{
             display: "grid",
@@ -68,10 +61,16 @@ const Solutions: React.FC = () => {
               justifyContent: { xs: "center", md: "flex-start" },
             }}
           >
+            {/* Motion wrapper for the card container without altering layout/colors */}
             <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               sx={{
                 p: { xs: 4, md: 6 },
-                  background: `linear-gradient(135deg, #f7f7f7 10%, #f5f7fb 25%,#e3edf7 50%,#cddff0 75%,#bfcfe5 100%)`,
+                background: `linear-gradient(135deg, #f7f7f7 10%, #f5f7fb 25%,#e3edf7 50%,#cddff0 75%,#bfcfe5 100%)`,
                 borderRadius: "32px",
                 boxShadow: "0 20px 80px rgba(0, 0, 0, 0.03)",
                 border: "1.2px solid #d7d8db",
@@ -81,7 +80,20 @@ const Solutions: React.FC = () => {
             >
               <Stack spacing={5}>
                 {solutions.map((solution, index) => (
-                  <Box key={index} sx={{ display: "flex", gap: 3 }}>
+                  // Staggered fade-in + slide-up per item
+                  <Box
+                    key={index}
+                    component={motion.div}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.6,
+                      ease: "easeOut",
+                      delay: index * 0.1, // 0.1s stagger
+                    }}
+                    sx={{ display: "flex", gap: 3 }}
+                  >
                     <Box
                       sx={{
                         width: 48,
@@ -129,44 +141,55 @@ const Solutions: React.FC = () => {
           <Box
             sx={{
               display: "flex",
-              justifyContent: { xs: "center", md: "flex-end" }, // push to right on desktop
+              justifyContent: { xs: "center", md: "flex-end" },
             }}
           >
+            {/* Motion wrapper for the right column content */}
             <Stack
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
               spacing={4}
               alignItems={{ xs: "flex-start", md: "flex-start" }}
               sx={{ maxWidth: 480 }}
             >
               <Box
-                                        sx={{
-                                          width: "fit-content",
-                                          display: "inline-flex",
-                                          alignItems: "center",
-                                          backgroundColor: "#E4F4D7",
-                                          borderRadius: "999px",
-                                          px: 2.5,
-                                          py: 1,
-                                          gap: 1.5,
-                                        }}
-                                      >
-                                        <Box
-                                          sx={{
-                                            width: 10,
-                                            height: 10,
-                                            borderRadius: "50%",
-                                            backgroundColor: colors.secondary,
-                                          }}
-                                        />
-                                        <Typography
-                                          sx={{
-                                            fontSize: "14px",
-                                            fontWeight: 600,
-                                            color: "#111827",
-                                          }}
-                                        >
-                                          OUR SOLUTION
-                                        </Typography>
-                                      </Box>
+                component={motion.div}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                sx={{
+                  width: "fit-content",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  backgroundColor: "#E4F4D7",
+                  borderRadius: "999px",
+                  px: 2.5,
+                  py: 1,
+                  gap: 1.5,
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: "50%",
+                    backgroundColor: colors.secondary,
+                  }}
+                />
+                <Typography
+                  sx={{
+                    fontSize: "14px",
+                    fontWeight: 600,
+                    color: "#111827",
+                  }}
+                >
+                  OUR SOLUTION
+                </Typography>
+              </Box>
 
               <Typography
                 variant="h2"

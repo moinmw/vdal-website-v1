@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Box, Typography, Container, Stack, Avatar } from "@mui/material";
+import { motion } from "framer-motion";
 
 const WhoBenefits: React.FC = () => {
   const colors = {
@@ -69,6 +70,11 @@ const WhoBenefits: React.FC = () => {
             <Stack spacing={4}>
               {/* Pill chip */}
               <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 sx={{
                   width: "fit-content",
                   display: "inline-flex",
@@ -99,44 +105,67 @@ const WhoBenefits: React.FC = () => {
                 </Typography>
               </Box>
 
-              <Typography
-                variant="h2"
-                sx={{
-                  fontSize: { xs: "2.5rem", md: "3.5rem" },
-                  fontWeight: 800,
-                  lineHeight: 1.1,
-                  color: "#000000c9",
-                  letterSpacing: "-0.03em",
-                }}
+              {/* Heading */}
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
               >
-                Built for the entire <br /> data organization
-              </Typography>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontSize: { xs: "2.5rem", md: "3.5rem" },
+                    fontWeight: 800,
+                    lineHeight: 1.1,
+                    color: "#000000c9",
+                    letterSpacing: "-0.03em",
+                  }}
+                >
+                  Built for the entire <br /> data organization
+                </Typography>
+              </Box>
 
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "#4B5563",
-                  fontSize: "18px",
-                  fontWeight: 400,
-                  lineHeight: 1.7,
-                  maxWidth: "520px",
-                }}
+              {/* Subheading */}
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
               >
-                VDAL serves every team that works with enterprise data, from
-                engineers to analysts to compliance officers.
-              </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: "#4B5563",
+                    fontSize: "18px",
+                    fontWeight: 400,
+                    lineHeight: 1.7,
+                    maxWidth: "520px",
+                  }}
+                >
+                  VDAL serves every team that works with enterprise data, from
+                  engineers to analysts to compliance officers.
+                </Typography>
+              </Box>
             </Stack>
           </Box>
 
           {/* RIGHT SIDE */}
           <Box>
+            {/* Motion wrapper for the card container to preserve layout integrity */}
             <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
               sx={{
                 backgroundColor: "#F5F5F7",
                 borderRadius: "32px",
                 p: { xs: 2.5, md: 3 },
                 border: "1.5px solid #d7d8db",
-                // boxShadow: "0 24px 60px rgba(15, 23, 42, 0.08)",
                 maxWidth: 520,
                 ml: { md: "auto" }, // push slightly to the right on desktop
               }}
@@ -145,6 +174,15 @@ const WhoBenefits: React.FC = () => {
                 {beneficiaries.map((beneficiary, index) => (
                   <Box
                     key={index}
+                    component={motion.div}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.6,
+                      ease: "easeOut",
+                      delay: index * 0.1, // stagger each row by 0.1s
+                    }}
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -153,8 +191,7 @@ const WhoBenefits: React.FC = () => {
                       py: { xs: 1.2, md: 1.4 },
                       borderRadius: "32px",
                       overflow: "hidden",
-                      background:
-                        "#fff",
+                      background: "#fff",
                     }}
                   >
                     {/* Left avatar */}
@@ -197,23 +234,6 @@ const WhoBenefits: React.FC = () => {
                         {beneficiary.description}
                       </Typography>
                     </Box>
-
-                    {/* Right avatar */}
-                    {/* <Avatar
-                      sx={{
-                        width: 40,
-                        height: 40,
-                        backgroundColor: "#FFFFFF",
-                        color: beneficiary.avatarColor,
-                        fontWeight: 600,
-                        fontSize: "13px",
-                        boxShadow: "0 8px 20px rgba(15, 23, 42, 0.25)",
-                        ml: 2,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {beneficiary.avatar}
-                    </Avatar> */}
                   </Box>
                 ))}
               </Stack>

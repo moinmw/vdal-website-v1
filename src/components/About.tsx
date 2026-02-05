@@ -7,16 +7,15 @@ import {
   Card,
   CardContent,
   Stack,
-
 } from "@mui/material";
 import {
   Hub as HubIcon,
   Timeline as TimelineIcon,
   Layers as LayersIcon,
 } from "@mui/icons-material";
+import { motion } from "framer-motion";
 
 // using CSS Grid via Box instead of MUI Grid to avoid Grid v2 warnings
-
 
 const AboutVdal = () => {
   const colors = {
@@ -56,6 +55,11 @@ const AboutVdal = () => {
             sx={{ textAlign: "center", maxWidth: "900px" }}
           >
             <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: "easeOut" }}
               sx={{
                 width: "fit-content",
                 display: "inline-flex",
@@ -85,28 +89,46 @@ const AboutVdal = () => {
                 ABOUT VDAL
               </Typography>
             </Box>
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: { xs: "2rem", md: "3.2rem" },
-                fontWeight: "bold",
-                color: "#000",
-              }}
+
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.05 }}
             >
-              Unifying{" "}
-              <Box component="span" sx={{ color: colors.primary }}>
-                enterprise data access
-              </Box>
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ color: "#000", fontSize: "1.1rem" }}
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: { xs: "2rem", md: "3.2rem" },
+                  fontWeight: "bold",
+                  color: "#000",
+                }}
+              >
+                Unifying{" "}
+                <Box component="span" sx={{ color: colors.primary }}>
+                  enterprise data access
+                </Box>
+              </Typography>
+            </Box>
+
+            <Box
+              component={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
             >
-              VDAL is a modern, secure, and intelligent platform that unifies
-              access to all enterprise data sources through a virtualized
-              layer.enabling governed analytics, seamless integration, and
-              real-time insights without moving data.
-            </Typography>
+              <Typography
+                variant="body1"
+                sx={{ color: "#000", fontSize: "1.1rem" }}
+              >
+                VDAL is a modern, secure, and intelligent platform that unifies
+                access to all enterprise data sources through a virtualized
+                layer.enabling governed analytics, seamless integration, and
+                real-time insights without moving data.
+              </Typography>
+            </Box>
           </Stack>
 
           {/* 2. FORCED ROW LAYOUT */}
@@ -116,15 +138,26 @@ const AboutVdal = () => {
               width: "100%",
               maxWidth: "85vw",
               mx: "auto",
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
+              display: "grid",
+              gridTemplateColumns: { xs: "1fr", md: "repeat(3, 1fr)" },
               gap: 3,
-              justifyContent: 'space-around',
-              
+              justifyContent: "space-around",
             }}
           >
             {features.map((feature, index) => (
-              <Box key={index} sx={{ display: "flex" }}>
+              <Box
+                key={index}
+                component={motion.div}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: index * 0.1,
+                }}
+                sx={{ display: "flex" }}
+              >
                 <Card
                   elevation={0}
                   sx={{
